@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { createMeal } from './handlers'
+import { checkSessionIdExists } from '../../midlewares/check-session-id-exists'
 
 export async function mealsRoutes(app: FastifyInstance) {
   app.addHook(
@@ -9,5 +10,5 @@ export async function mealsRoutes(app: FastifyInstance) {
     }
   )
 
-  app.post('/create', createMeal)
+  app.post('/create', { preHandler: [checkSessionIdExists] }, createMeal)
 }
