@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
-import { createMeal } from './handlers'
+import { createMeal, editMeal, deleteMeal, listMeals } from './handlers'
 import { checkSessionIdExists } from '../../midlewares/check-session-id-exists'
 
 export async function mealsRoutes(app: FastifyInstance) {
@@ -11,4 +11,7 @@ export async function mealsRoutes(app: FastifyInstance) {
   )
 
   app.post('/create', { preHandler: [checkSessionIdExists] }, createMeal)
+  app.patch('/edit', { preHandler: [checkSessionIdExists] }, editMeal)
+  app.delete('/delete', { preHandler: [checkSessionIdExists] }, deleteMeal)
+  app.post('/list', { preHandler: [checkSessionIdExists] }, listMeals)
 }
