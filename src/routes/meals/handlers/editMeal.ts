@@ -45,7 +45,7 @@ export async function editMeal(
     .update({
       date_time: date_time ? date_time : meal.date_time,
       description: description ? description : meal.description,
-      on_diet: on_diet ? on_diet : meal.on_diet,
+      on_diet: on_diet !== undefined ? on_diet : meal.on_diet,
     })
 
   reply.status(204)
